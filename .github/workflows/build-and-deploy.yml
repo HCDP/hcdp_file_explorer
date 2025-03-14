@@ -23,7 +23,7 @@ jobs:
     - name: upload artifacts
       uses: actions/upload-pages-artifact@v3
       with:
-        path: dist
+        path: dist/hcdp-file-explorer/browser
   deploy:
     # Add a dependency to the build job
     needs: build
