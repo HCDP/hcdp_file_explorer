@@ -19,7 +19,7 @@ jobs:
     - name: add config
       run: echo "${{ secrets.API_TOKEN }}" >> src/assets/token.txt
     - name: build
-      run: npm install && ng build --configuration production --base-href /hcdp_file_explorer/
+      run: npm install && npm run build-pages
     - name: upload artifacts
       uses: actions/upload-pages-artifact@v3
       with:
