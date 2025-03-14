@@ -3,7 +3,7 @@ name: build_and_deploy
 on:
   push:
     branches:
-    - "prod"
+    - "main"
     paths-ignore:
     - "**/README.md"
   workflow_dispatch:
