@@ -14,7 +14,6 @@ export class AuthService {
 
   constructor(private pathFactory: PathFactoryService, private http: HttpClient) {
     const tokenURL = pathFactory.getAssetURL(AuthService.TOKEN_FILE);
-    console.log(tokenURL);
     this.token = firstValueFrom(this.http.get(tokenURL, {responseType: "text"}));
   }
 
