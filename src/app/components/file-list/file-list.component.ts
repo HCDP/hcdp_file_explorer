@@ -22,7 +22,7 @@ export class FileListComponent {
   message: string;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private auth: AuthService, private pathFactory: PathFactoryService) {
-    this.fileData = [];
+    this.fileData = null;
     this.message = "";
     let epRoute = route.snapshot.url.reduce((stub: string, urlData: UrlSegment) => {
       return stub + `/${urlData.path}`;
