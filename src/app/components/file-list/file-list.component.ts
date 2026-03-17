@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, UrlSegment, Router, RouterModule } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
 import { PathFactoryService } from '../../services/path-factory.service';
@@ -14,7 +14,7 @@ import { BreadcrumbsComponent } from "../breadcrumbs/breadcrumbs.component";
 @Component({
   selector: 'app-file-list',
   standalone: true,
-  imports: [HttpClientModule, MatProgressSpinnerModule, CommonModule, MatIconModule, RouterModule, MatSortModule, BreadcrumbsComponent],
+  imports: [MatProgressSpinnerModule, CommonModule, MatIconModule, RouterModule, MatSortModule, BreadcrumbsComponent],
   templateUrl: './file-list.component.html',
   styleUrl: './file-list.component.css'
 })
