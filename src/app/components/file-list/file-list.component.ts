@@ -12,11 +12,10 @@ import { Sort, MatSortModule } from '@angular/material/sort';
 import { BreadcrumbsComponent } from "../breadcrumbs/breadcrumbs.component";
 
 @Component({
-  selector: 'app-file-list',
-  standalone: true,
-  imports: [MatProgressSpinnerModule, CommonModule, MatIconModule, RouterModule, MatSortModule, BreadcrumbsComponent],
-  templateUrl: './file-list.component.html',
-  styleUrl: './file-list.component.css'
+    selector: 'app-file-list',
+    imports: [MatProgressSpinnerModule, CommonModule, MatIconModule, RouterModule, MatSortModule, BreadcrumbsComponent],
+    templateUrl: './file-list.component.html',
+    styleUrl: './file-list.component.css'
 })
 export class FileListComponent implements OnInit {
   loading = true;
