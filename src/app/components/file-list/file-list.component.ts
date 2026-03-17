@@ -8,11 +8,13 @@ import { firstValueFrom } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { saveAs } from 'file-saver';
+import { Sort, MatSortModule } from '@angular/material/sort';
+import { BreadcrumbsComponent } from "../breadcrumbs/breadcrumbs.component";
 
 @Component({
   selector: 'app-file-list',
   standalone: true,
-  imports: [HttpClientModule, MatProgressSpinnerModule, CommonModule, MatIconModule, RouterModule],
+  imports: [HttpClientModule, MatProgressSpinnerModule, CommonModule, MatIconModule, RouterModule, MatSortModule, BreadcrumbsComponent],
   templateUrl: './file-list.component.html',
   styleUrl: './file-list.component.css'
 })
@@ -64,7 +66,7 @@ export class FileListComponent implements OnInit {
           }
         }
       }
-      // Otherwise redirect to file download link
+      // Otherwise download file and redirect to parent directory
       else {
         const fileObj = pathData.content[0];
         await this.download(fileObj.url, fileObj.name);
@@ -85,11 +87,9 @@ export class FileListComponent implements OnInit {
   }
 
   linkClick(e: MouseEvent, item: FileData) {
-    e.preventDefault(); 
-    if (item.type === 'f') {
+    if(item.type === 'f') {
+      e.preventDefault(); 
       this.download(item.url, item.name);
-    } else {
-      this.router.navigate([item.path]);
     }
   }
 
@@ -107,6 +107,48 @@ export class FileListComponent implements OnInit {
         this.message = "An error occurred while retreiving the requested directory"
       }
     }
+  }
+
+  fileSize(bytes: number, useIEC: boolean = true) {
+    // IEC standard uses binary (1024), SI uses decimal (1000) magnitude
+    const base = useIEC ? 1024.0 : 1000.0;
+    const exponent = Math.floor(Math.log(bytes) / Math.log(base))
+    const decimal = (bytes / Math.pow(base, exponent)).toFixed(exponent ? 2 : 0)
+    let units = "B";
+    // IEC style prefix
+    if(exponent > 0 && useIEC) {
+      units = `${'KMGTPEZY'[exponent - 1]}iB`;
+    }
+    // SI style prefix
+    else if(exponent > 0) {
+      units = `${'kMGTPEZY'[exponent - 1]}B`;
+    }
+    return `${decimal} ${units}`;
+  }
+
+  formatDate(isoDate: string) {
+    let formatted = new Date(isoDate).toLocaleString("en-US", {timeZone: "Pacific/Honolulu"}) + " HST";
+    return formatted;
+  }
+
+  sortData(sort: Sort) {
+    this.fileData?.sort((a: FileData, b: FileData) => {
+      console.log(sort)
+      let field = <"name" | "sizeBytes" | "modified">sort.active;
+      let aField = a[field];
+      let bField = b[field];
+      let order = sort.direction == "asc" ? -1 : 1
+      if(typeof aField == "number" && typeof bField == "number") {
+        order *= (aField - bField);
+      }
+      else if(typeof aField == "string" && typeof bField == "string") {
+        order *= aField.localeCompare(bField);
+      }
+      else {
+        throw new Error("Invalid comparison types.");
+      }
+      return order;
+    });
   }
 }
 

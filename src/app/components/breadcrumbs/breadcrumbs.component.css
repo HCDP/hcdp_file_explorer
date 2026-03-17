@@ -1,0 +1,21 @@
+.custom-breadcrumb ol {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-breadcrumb li {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  margin: 0 8px;
+  color: #6c757d;
+}
+
+.current-item {
+  color: #6c757d;
+  font-weight: bold;
+}

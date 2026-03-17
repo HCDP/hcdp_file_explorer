@@ -1,3 +1,4 @@
+<app-breadcrumbs></app-breadcrumbs>
 @if(message) {
   <h2>
     {{message}}
@@ -9,11 +10,11 @@
   </h2>
 }
 @else if(fileData) {
-  <table>
+  <table matSort (matSortChange)="sortData($event)">
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Size (Bytes)</th>
+      <th mat-sort-header="name" start="desc" disableClear>Name</th>
+      <th mat-sort-header="sizeBytes" disableClear>Size</th>
+      <th mat-sort-header="modified" disableClear>Modifed</th>
     </tr>
     <tr *ngFor="let data of fileData">
       <td>
@@ -23,8 +24,8 @@
         <mat-icon class="icon" [fontIcon]="data.type == 'd' ? 'folder' : 'download'"></mat-icon>
       </td>
       
-      <td>{{data.type == "f" ? "File" : "Directory"}}</td>
-      <td>{{data.type == "f" ? data.sizeBytes : ""}}</td>
+      <td>{{data.type == "f" ? fileSize(data.sizeBytes) : ""}}</td>
+      <td>{{formatDate(data.modified)}}</td>
     </tr>
   </table>
 }
