@@ -32,13 +32,20 @@ export class FileListComponent {
 
   private async getValues(ep: string) {
     const headers = await this.auth.getAPIHeaders();
-    let fileData = null;
+    let fileData: FileData[] | null = null;
     try {
-      fileData = await firstValueFrom<FileData[]>(this.http.get<FileData[]>(ep, { headers, responseType: "json" }));
-      for(let data of fileData) {
-        if(data.type == "d") {
+      let pathData = await firstValueFrom<PathData>(this.http.get<PathData>(ep, { headers, responseType: "json" }));
+      // If the current path is a directory then list the directory
+      if(pathData.pathType == "d") {
+        fileData = pathData.content;
+        // Rewrite URLs to explorer app URLs
+        for(let data of fileData) {
           data.url = this.pathFactory.getPathURL(data.path);
         }
+      }
+      // Otherwise redirect to file download link
+      else {
+        window.location.href = pathData.content[0].url;
       }
     }
     catch(e: any) {
@@ -65,10 +72,15 @@ export class FileListComponent {
         this.message = "The requested file could not be found"
       }
       else {
-        this.message = "An error occurred while retreiving the requested file"
+        this.message = "An error occurred while retreiving the requested directory"
       }
     }
   }
+}
+
+interface PathData {
+  pathType: "f" | "d",
+  content: FileData[]
 }
 
 interface FileData {
@@ -76,6 +88,7 @@ interface FileData {
   path: string
   name: string,
   ext: string,
+  modified: string,
   sizeBytes: number,
   type: "f" | "d"
 }

@@ -24,7 +24,7 @@
     </tr>
     <tr *ngFor="let data of fileData">
       <td *ngIf="data.type == 'd';else downloadLink"><a [href]="data.url">{{data.name}}</a><mat-icon class="icon" fontIcon="folder"></mat-icon></td>
-      <ng-template #downloadLink><td><a href="javascript:void(0);" (click)="download(data.url, data.name)">{{data.name}}</a><mat-icon class="icon" fontIcon="download"></mat-icon></td></ng-template>
+      <ng-template #downloadLink><td><a [href]="data.url">{{data.name}}</a><mat-icon class="icon" fontIcon="download"></mat-icon></td></ng-template>
       <td>{{data.type == "f" ? "File" : "Directory"}}</td>
       <td>{{data.type == "f" ? data.sizeBytes : ""}}</td>
     </tr>
