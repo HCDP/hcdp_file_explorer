@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, UrlSegment, Router, RouterModule } from '@angular/router';
-import { CommonModule, Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { PathFactoryService } from '../../services/path-factory.service';
 import { AuthService } from '../../services/auth.service';
 import { firstValueFrom } from 'rxjs';
@@ -13,9 +13,9 @@ import { BreadcrumbsComponent } from "../breadcrumbs/breadcrumbs.component";
 
 @Component({
     selector: 'app-file-list',
-    imports: [MatProgressSpinnerModule, CommonModule, MatIconModule, RouterModule, MatSortModule, BreadcrumbsComponent],
+    imports: [MatProgressSpinnerModule, MatIconModule, RouterModule, MatSortModule, BreadcrumbsComponent],
     templateUrl: './file-list.component.html',
-    styleUrl: './file-list.component.css'
+    styleUrl: './file-list.component.scss'
 })
 export class FileListComponent implements OnInit {
   loading = true;

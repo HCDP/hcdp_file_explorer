@@ -12,10 +12,17 @@
 
 .separator {
   margin: 0 8px;
-  color: #6c757d;
+  font-size: 30px;
+  color: dimgray;
 }
 
 .current-item {
-  color: #6c757d;
-  font-weight: bold;
+  font-weight: 600;
+  color: dimgray;
+}
+
+
+.mat-tonal-button>.mat-icon {
+  margin: 0;
+  padding: 0;
 }

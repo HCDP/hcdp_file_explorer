@@ -1,0 +1,25 @@
+/* src/styles.scss */
+@use '@angular/material' as mat;
+
+/* Includes essential structural styles */
+@include mat.core();
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0
+  ));
+}
+
+/* Basic page reset */
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

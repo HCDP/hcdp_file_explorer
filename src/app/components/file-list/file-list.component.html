@@ -1,34 +1,38 @@
-<app-breadcrumbs></app-breadcrumbs>
+<div class="breadcrumbs">
+  <app-breadcrumbs></app-breadcrumbs>
+</div>
+
 @if(message) {
   <h2>
     {{message}}
   </h2>
 }
 @else if(fileData && fileData.length == 0) {
-  <h2>
-    This folder is empty
-  </h2>
+<h2>
+  This folder is empty
+</h2>
 }
 @else if(fileData) {
-  <table matSort (matSortChange)="sortData($event)">
+<table matSort (matSortChange)="sortData($event)">
+  <tr>
+    <th mat-sort-header="name" start="desc" disableClear>Name</th>
+    <th mat-sort-header="sizeBytes" disableClear>Size</th>
+    <th mat-sort-header="modified" disableClear>Modifed</th>
+  </tr>
+  @for (data of fileData; track data) {
     <tr>
-      <th mat-sort-header="name" start="desc" disableClear>Name</th>
-      <th mat-sort-header="sizeBytes" disableClear>Size</th>
-      <th mat-sort-header="modified" disableClear>Modifed</th>
-    </tr>
-    <tr *ngFor="let data of fileData">
       <td>
         <a [href]="getLinkUrl(data.path)" (click)="linkClick($event, data)">
           {{data.name}}
         </a>
         <mat-icon class="icon" [fontIcon]="data.type == 'd' ? 'folder' : 'download'"></mat-icon>
       </td>
-      
       <td>{{data.type == "f" ? fileSize(data.sizeBytes) : ""}}</td>
       <td>{{formatDate(data.modified)}}</td>
     </tr>
-  </table>
+  }
+</table>
 }
 @else {
-  <mat-spinner></mat-spinner>
+<mat-spinner></mat-spinner>
 }

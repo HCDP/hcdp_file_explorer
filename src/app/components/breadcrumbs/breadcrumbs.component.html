@@ -1,14 +1,22 @@
 <nav aria-label="breadcrumb" class="custom-breadcrumb">
   <ol>
-    <li><a routerLink="/">.</a></li>
-    
-    <li *ngFor="let crumb of breadcrumbs; let last = last">
-      <span class="separator"> / </span>
-      
-      <button *ngIf="!last" mat-flat-button [routerLink]="crumb.url">{{ crumb.label }}</button>
-      <!-- <a *ngIf="!last" [routerLink]="crumb.url">{{ crumb.label }}</a> -->
-      
-      <span *ngIf="last" class="current-item">{{ crumb.label }}</span>
+    <li>
+      <button matButton="tonal" routerLink="/" aria-label="Explorer home">
+        <mat-icon>home</mat-icon>
+      </button>
     </li>
+
+    @for (crumb of breadcrumbs; track crumb; let last = $last) {
+      <li>
+        <span class="separator"> / </span>
+        @if (!last) {
+          <a matButton="tonal" [routerLink]="crumb.url" aria-label="Breadcrumb link">{{ crumb.label }}</a>
+        }
+        <!-- <a *ngIf="!last" [routerLink]="crumb.url">{{ crumb.label }}</a> -->
+        @if (last) {
+          <span class="current-item">{{ crumb.label }}</span>
+        }
+      </li>
+    }
   </ol>
 </nav>

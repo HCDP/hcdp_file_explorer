@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 interface Breadcrumb {
   label: string;
@@ -12,9 +12,9 @@ interface Breadcrumb {
 
 @Component({
     selector: 'app-breadcrumbs',
-    imports: [CommonModule, RouterModule, MatButtonModule],
+    imports: [RouterModule, MatButtonModule, MatIconModule],
     templateUrl: './breadcrumbs.component.html',
-    styleUrl: './breadcrumbs.component.css'
+    styleUrl: './breadcrumbs.component.scss'
 })
 export class BreadcrumbsComponent implements OnInit {
 breadcrumbs: Breadcrumb[] = [];
@@ -22,10 +22,10 @@ breadcrumbs: Breadcrumb[] = [];
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // 1. Build breadcrumbs on initial load
+    // Build breadcrumbs on initial load
     this.generateBreadcrumbs();
 
-    // 2. Rebuild breadcrumbs whenever the URL changes
+    // Rebuild breadcrumbs whenever the URL changes
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
