@@ -17,7 +17,7 @@
     </tr>
     <tr *ngFor="let data of fileData">
       <td>
-        <a [href]="data.path" (click)="linkClick($event, data)">
+        <a [href]="getLinkUrl(data.path)" (click)="linkClick($event, data)">
           {{data.name}}
         </a>
         <mat-icon class="icon" [fontIcon]="data.type == 'd' ? 'folder' : 'download'"></mat-icon>

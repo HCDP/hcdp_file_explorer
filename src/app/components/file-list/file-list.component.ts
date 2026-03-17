@@ -44,6 +44,11 @@ export class FileListComponent implements OnInit {
     });
   }
 
+  getLinkUrl(path: string) {
+    let url = this.pathFactory.getPathURL(path);
+    return url;
+  }
+
   private async getValues(ep: string) {
     const headers = await this.auth.getAPIHeaders();
     let fileData: FileData[] | null = null;
