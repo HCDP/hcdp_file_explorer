@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js 20.9.0
+    - name: Use Node.js 22.19.0
       uses: actions/setup-node@v4
       with:
-        node-version: 20.9.0
+        node-version: 22.19.0
     - name: add config
       run: echo "${{ secrets.API_TOKEN }}" >> src/assets/token.txt
     - name: build
