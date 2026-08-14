@@ -40,6 +40,13 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "vitest": "^4.0.8"
+  },
+  "allowScripts": {
+    "@parcel/watcher": true,
+    "esbuild": true,
+    "lmdb": true,
+    "msgpackr-extract": true
   }
 }
