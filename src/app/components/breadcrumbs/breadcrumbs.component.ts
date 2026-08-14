@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ interface Breadcrumb {
     selector: 'app-breadcrumbs',
     imports: [RouterModule, MatButtonModule, MatIconModule],
     templateUrl: './breadcrumbs.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './breadcrumbs.component.scss'
 })
 export class BreadcrumbsComponent implements OnInit {
