@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, UrlSegment, Router, RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
@@ -15,6 +15,7 @@ import { BreadcrumbsComponent } from "../breadcrumbs/breadcrumbs.component";
     selector: 'app-file-list',
     imports: [MatProgressSpinnerModule, MatIconModule, RouterModule, MatSortModule, BreadcrumbsComponent],
     templateUrl: './file-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './file-list.component.scss'
 })
 export class FileListComponent implements OnInit {
