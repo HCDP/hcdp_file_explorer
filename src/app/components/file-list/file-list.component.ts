@@ -133,7 +133,6 @@ export class FileListComponent implements OnInit {
 
   sortData(sort: Sort) {
     this.fileData?.sort((a: FileData, b: FileData) => {
-      console.log(sort)
       let field = <"name" | "sizeBytes" | "modified">sort.active;
       let aField = a[field];
       let bField = b[field];
